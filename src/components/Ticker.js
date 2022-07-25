@@ -12,6 +12,20 @@ function Ticker() {
     };
   }, []);
 
+  useEffect(() => {
+    // use the current value of the ref
+    const prevPrice = prevPriceRef.current;
+    if (price > prevPrice) {
+      setColor("green");
+    } else if (price < prevPrice) {
+      setColor("red");
+    } else {
+      setColor("black");
+    }
+    // set the new value of the ref (note: this doesn't trigger a re-render)
+    prevPriceRef.current = price;
+  }, [price]);
+
   return (
     <div>
       <h1>TickerMaster</h1>
